@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class Hotel {
     private ArrayList<Room> roomList;
+    private ArrayList<Employee> employeeList;
     private String name;
 
 
     public Hotel(String name) {
         this.name = name;
         this.roomList = new ArrayList <Room>();
+        this.employeeList = new ArrayList <Employee>();
     }
     
     public String getName(){
@@ -21,20 +23,24 @@ public class Hotel {
         return this.roomList;
     }
 
+    public ArrayList <Employee> getEmployees(){
+        return this.employeeList;
+    }
+
     public void setName(String newName){
         this.name = newName;
     }
 
-    // public void setBudget (double newBudget){
-    //     this.budget = newBudget;
-    // }
-
-    // public void setNumber(int newNumber){
-    //     this.number = newNumber;
-    // }
-
     public void setRoomList(ArrayList<Room> newRoomList){
         this.roomList = newRoomList;
+    }
+
+    public void hireEmployee(Employee employee){
+        this.employeeList.add(employee);
+    }
+
+    public void fireEmployee (Employee employee){
+        this.employeeList.remove(employee);
     }
 
     
@@ -47,7 +53,7 @@ public class Hotel {
         }
         return availableRooms;
     }
-    public void bookRooms(int number, double budget){
+    public void bookRooms(ArrayList <Guest> guestsList, double budget){
         ArrayList<Room> affordableRooms = new ArrayList<Room>();
         ArrayList<Room> selectedRooms = this.findAvailableRooms();
         for (Room room : selectedRooms){
@@ -66,24 +72,12 @@ public class Hotel {
             }
         }
 
+    
         
     }
 
-    // public ArrayList<Room> book(int noOfPpl, double budget){
-    //     System.out.println(budget);
-    //     ArrayList<Room> affordableRooms = new ArrayList<Room>();
-    //     ArrayList<Room> selectedRooms = this.availableRooms();
-    //     for (Room room : selectedRooms){
-    //         if (room.getPrice()<=budget){
-    //             affordableRooms.add(room);
-    //         }
-    //     }
-    // }
-    
-    
 
-    
-//for booking, check whether romms available
+///for booking, check whether romms available
 //loop over room list and fill out all available rooms
 //sort available roomlist from lowest to highest price
 //iterate through list and see how many rooms you need for no ppl in booking
