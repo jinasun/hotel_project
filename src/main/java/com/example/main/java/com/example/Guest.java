@@ -1,10 +1,11 @@
 package main.java.com.example;
 
-public class Guest {
+public class Guest extends Person {
     private boolean breakfast;
     private int id;
 
-    public Guest(int id, boolean breakfast) {
+    public Guest( boolean breakfast, int id, int age, String sex, String name, double weight, double height){
+        super(age, sex, name, weight, height);
         this.id = id;
         this.breakfast = breakfast;
     }
@@ -17,12 +18,12 @@ public class Guest {
         return this.breakfast;
     }
 
-    public void setID(int newID){
-        this.id = newID;
-    }
+    // public void setID(int newID){
+    //     this.id = newID;
+    // }
 
-    public void setBreakfast(boolean newBreakfast){
-        this.breakfast = newBreakfast;
-    }
+    // public void setBreakfast(boolean newBreakfast){
+    //     this.breakfast = newBreakfast;
+    // }
 
 }
