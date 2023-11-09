@@ -53,13 +53,15 @@ public class Hotel {
         }
         return availableRooms;
     }
-    public void bookRooms(ArrayList <Guest> guestsList, double budget){
+    public boolean bookRooms(ArrayList <Guest> guestsList, double budget){
         ArrayList<Room> affordableRooms = new ArrayList<Room>();
         ArrayList<Room> selectedRooms = this.findAvailableRooms();
         for (Room room : selectedRooms){
             if (room.getPrice()<=budget){
                 affordableRooms.add(room);
             }
+
+
         }
         
         for (int i = 0; i<affordableRooms.size()-1; i++ ){
@@ -71,9 +73,44 @@ public class Hotel {
                 }
             }
         }
-
-    
         
+        ArrayList<Room> roomsForBooking = new ArrayList<Room>();
+        int counter = 0;
+        for (Room room : affordableRooms){
+            if (counter >= guestsList.size()){
+                break;
+            }
+            roomsForBooking.add(room);
+            counter = counter + room.getOccupancy();
+        }
+        if (counter <= guestsList.size()){
+            return false;
+        }
+
+        double totalRoomPrice = 0;
+        for (Room room : roomsForBooking){
+            totalRoomPrice = totalRoomPrice + room.getPrice();
+        }
+        if (budget < totalRoomPrice){
+            return false;
+        }
+
+        for (Room room : roomsForBooking){
+            room.setOccupied(true);
+        }
+        int guestsInRooms=0;
+        
+        for (Room room : roomsForBooking){
+            room.setOccupied(true);
+            for (int i = 0; i<room.getOccupancy(); i++){
+                if (guestsList.contains(guestsList.get(guestsInRooms+i))){
+                    room.addGuest(guestsList.get(guestsInRooms+i));
+                    guestsInRooms++;
+                }
+            }
+        }
+        return true;
+
     }
 
 

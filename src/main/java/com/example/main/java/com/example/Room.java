@@ -53,4 +53,6 @@ public class Room {
     public void removeGuest (Guest guest){
         this.guestsList.remove(guest);
     }
+
+    
 }
